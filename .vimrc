@@ -33,6 +33,74 @@
 " Sets how many lines of history VIM has to remember
 set history=500
 
+"use py3
+set pyxversion=3
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"plugins"
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'Shougo/denite.nvim'
+Plug 'artur-shaik/vim-javacomplete2'
+Plug 'majutsushi/tagbar'
+Plug 'sbdchd/neoformat'
+
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+
+
+if has('nvim')
+  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/defx.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+call plug#end()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"plugin setups
+"javacomplete2 setup
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+nmap <F4> <Plug>(JavaComplete-Imports-AddSmart)
+imap <F4> <Plug>(JavaComplete-Imports-AddSmart)
+
+nmap <F5> <Plug>(JavaComplete-Imports-Add)
+imap <F5> <Plug>(JavaComplete-Imports-Add)
+
+nmap <F6> <Plug>(JavaComplete-Imports-AddMissing)
+imap <F6> <Plug>(JavaComplete-Imports-AddMissing)
+
+nmap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
+imap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
+
+"tagbar
+nmap <F8> :TagbarToggle<CR>
+
+"neoformat
+let g:neoformat_java_google = {
+    \'exe': 'java',
+    \'args': ['-jar /usr/share/java/google-java-format/google-java-format.jar -'],
+    \'stdin': 1,
+    \}
+let g:neoformat_enabled_java = ['google']
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
