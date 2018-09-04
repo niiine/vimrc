@@ -49,6 +49,7 @@ Plug 'Shougo/denite.nvim'
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'majutsushi/tagbar'
 Plug 'sbdchd/neoformat'
+"Plug 'neomake/neomake'
 
 
 if has('nvim')
@@ -74,19 +75,15 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "plugin setups
 "javacomplete2 setup
+set omnifunc=syntaxcomplete#Complete
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
-
-nmap <F4> <Plug>(JavaComplete-Imports-AddSmart)
-imap <F4> <Plug>(JavaComplete-Imports-AddSmart)
-
-nmap <F5> <Plug>(JavaComplete-Imports-Add)
-imap <F5> <Plug>(JavaComplete-Imports-Add)
-
-nmap <F6> <Plug>(JavaComplete-Imports-AddMissing)
-imap <F6> <Plug>(JavaComplete-Imports-AddMissing)
-
-nmap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
-imap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
+let g:deoplete#omni_patterns = {}
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
+let g:deoplete#auto_completion_start_length = 2
+let g:deoplete#sources = {}
+let g:deoplete#sources._ = []
+let g:deoplete#file#enable_buffer_path = 1
 
 "tagbar
 nmap <F8> :TagbarToggle<CR>
