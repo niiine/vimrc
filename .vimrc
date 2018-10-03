@@ -11,6 +11,7 @@
 "
 " Sections:
 "    -> General
+"    -> Plugins
 "    -> VIM user interface
 "    -> Colors and Fonts
 "    -> Files and backups
@@ -36,7 +37,28 @@ set history=500
 "use py3
 set pyxversion=3
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"plugins"
+
+" Enable filetype plugins
+filetype plugin on
+filetype indent on
+
+" Set to auto read when a file is changed from the outside
+set autoread
+
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
+
+" Fast saving
+nmap <leader>w :w!<cr>
+
+" :W sudo saves the file 
+" (useful for handling the permission-denied error)
+command W w !sudo tee % > /dev/null
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -95,27 +117,6 @@ let g:neoformat_java_google = {
     \'stdin': 1,
     \}
 let g:neoformat_enabled_java = ['google']
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Enable filetype plugins
-filetype plugin on
-filetype indent on
-
-" Set to auto read when a file is changed from the outside
-set autoread
-
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader = ","
-
-" Fast saving
-nmap <leader>w :w!<cr>
-
-" :W sudo saves the file 
-" (useful for handling the permission-denied error)
-command W w !sudo tee % > /dev/null
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -255,6 +256,11 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
+" Enable Folding
+set foldmethod=indent
+set foldlevel=99
+" map space to za (will get overwritten by (search) later
+nnoremap <space> za
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
