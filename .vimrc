@@ -76,6 +76,11 @@ Plug 'sbdchd/neoformat'
 Plug 'tmhedberg/SimpylFold'
 Plug 'vim-scripts/indentpython.vim'
 "Plug 'neomake/neomake'
+Plug 'zchee/deoplete-jedi'
+Plug 'vim-syntastic/syntastic'
+Plug 'nvie/vim-flake8'
+Plug 'Lokaltog/powerline'
+Plug 'scrooloose/nerdtree'
 
 
 if has('nvim')
@@ -202,6 +207,9 @@ set foldcolumn=1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
 syntax enable
+let python_highlight_all=1
+syntax on
+
 
 " Enable 256 colors palette in Gnome Terminal
 if $COLORTERM == 'gnome-terminal'
